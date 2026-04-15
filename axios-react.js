@@ -47,4 +47,50 @@
       }
     }
     render();
-  }
+  }function render() {
+    root.innerHTML = `
+      <p id="message" class="muted"></p>
+      
+      <div class="grid">
+        <div>
+          <label>Kategória neve</label>
+          <input id="inputNev" placeholder="pl. apród, lovag">
+        </div>
+        <div>
+          <label>Ár (Ft)</label>
+          <input id="inputAr" type="number" placeholder="pl. 850" min="0">
+        </div>
+      </div>
+      
+      <div class="actions" style="margin-top: .75rem">
+        <button id="btnSave">${editingId === null ? "Új kategória" : "Módosítás"}</button>
+        <button id="btnReset" class="secondary">Űrlap törlése</button>
+      </div>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Kategória</th>
+            <th>Ár (Ft)</th>
+            <th>Művelet</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          ${categories.map(c => `
+            <tr>
+              <td>${c.id}</td>
+              <td><strong>${c.nev}</strong></td>
+              <td>${c.ar}</td>
+              <td>
+                <div class="actions">
+                  <button data-edit="${c.id}" class="secondary">Szerkeszt</button>
+                  <button data-del="${c.id}" class="secondary">Töröl</button>
+                </div>
+              </td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    `;
+  
