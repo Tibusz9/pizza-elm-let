@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript CRUD</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Web programozás-1 Előadás Házi feladat</h1>
+    <nav>
+      <a href="index.html">Főoldal</a><a href="javascript.html">JavaScript CRUD</a><a href="react.html">React CRUD</a><a href="spa.html">SPA</a><a href="fetchapi.html">Fetch API</a><a href="axios.html">Axios + React</a><a href="oojs.html">OOJS</a>
+    </nav>
+  </header>
+  <main>
+    <section class="card">
+      <h2>JavaScript CRUD (tömb alapú)</h2>
+      <div class="grid">
+        <div>
+          <label>Név</label><input id="nev" />
+        </div>
+        <div>
+          <label>Kategória</label><select id="kategoria"></select>
+        </div>
+        <div>
+          <label>Vegetáriánus</label>
+          <select id="veg"><option value="0">Nem</option><option value="1">Igen</option></select>
+        </div>
+      </div>
+      <div class="actions" style="margin-top:.75rem">
+        <button id="saveBtn">Mentés (Create / Update)</button>
+        <button id="resetBtn" class="secondary">Űrlap törlése</button>
+      </div>
+      <p id="msg" class="muted"></p>
+      <table>
+        <thead><tr><th>Név</th><th>Kategória</th><th>Vegetáriánus</th><th>Művelet</th></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </section>
+  </main>
+  <footer>Készítők: <strong>Mészáros Tibor Ákos - Z21NS6</strong>, <strong>Becskeházi-Facskó Edit - CZU6N7</strong></footer>
+  <script src="data/pizzaData.js"></script>
+  <script src="assets/js/javascript-crud.js"></script>
+</body>
+</html>
