@@ -4,3 +4,20 @@ class Sprite {
     this.x = x;
     this.y = y;
     this.emoji = emoji;
+    this.el = document.createElement("div");
+    this.el.className = "sprite";
+    this.el.textContent = emoji;
+    this.render();
+  }
+
+  render() {
+    this.el.style.left = `${this.x}px`;
+    this.el.style.top = `${this.y}px`;
+  }
+
+  move(dx, dy) {
+    this.x += dx;
+    this.y += dy;
+    this.render();
+  }
+}
