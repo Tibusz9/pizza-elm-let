@@ -19,3 +19,14 @@ async function request(url, options = {}) {
   if (!res.ok) throw new Error(data.error || "Hiba történt");
   return data;
 }
+async function loadRows() {
+  try {
+    const rows = await request(API_URL);
+    render(rows);
+    fMsg.textContent = `Betöltve: ${rows.length} rekord`;
+    fMsg.className = "muted";
+  } catch (err) {
+    fMsg.textContent = err.message;
+    fMsg.className = "warning";
+  }
+}
