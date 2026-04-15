@@ -47,3 +47,14 @@ function spawnFutar() {
   log.className = "muted";
   log.textContent = `${f.name} létrehozva.`;
   document.body.appendChild(log);
+  }
+
+function moveAll() {
+  const maxW = playground.clientWidth;
+  const maxH = playground.clientHeight;
+  futarok.forEach(f => f.randomStep(maxW, maxH));
+}
+
+document.getElementById("spawn").addEventListener("click", spawnFutar);
+document.getElementById("move").addEventListener("click", moveAll);
+
