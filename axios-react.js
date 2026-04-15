@@ -162,3 +162,39 @@
       console.error("Save error:", err);
     }
   }
+async function deleteRow(id) {
+    try {
+      if (usingAxios && hasAxios()) {
+        await window.axios.delete(`${API_URL}?id=${id}`);
+        showMessage("Kategória sikeresen törölve!", "success");
+        await loadData();
+      } else {
+        categories = categories.filter(c => c.id !== id);
+        showMessage("Kategória sikeresen törölve!", "success");
+        if (editingId === id) resetForm();
+        render();
+      }
+    } catch (err) {
+      showMessage("Hiba: " + err.message, "warning");
+      console.error("Delete error:", err);
+    }
+  }
+
+  function resetForm() {
+    document.getElementById("inputNev").value = "";
+    document.getElementById("inputAr").value = "";
+    editingId = null;
+    render();
+  }
+
+  function showMessage(text, type) {
+    const msgEl = document.getElementById("message");
+    if (msgEl) {
+      msgEl.textContent = text;
+      msgEl.className = type;
+    }
+  }
+
+  // Kezdeti betöltés, de mérsékelten hosszú késleltetéssel az Axios betöltéséhez
+  setTimeout(loadData, 500);
+})();
