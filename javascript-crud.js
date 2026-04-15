@@ -22,3 +22,11 @@ if (saveBtn) {
     onSave();
   });
 }
+
+if (resetBtn) {
+  resetBtn.addEventListener("click", function(e) {
+    e.preventDefault();
+    console.log("Reset button clicked!");
+    resetForm();
+  });
+}
