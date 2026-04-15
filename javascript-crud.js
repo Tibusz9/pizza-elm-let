@@ -81,3 +81,54 @@ function onDelete(index) {
   if (editIndex === index) editIndex = -1;
   render();
 }
+
+function resetForm() {
+  pizzanevEl.value = "";
+  darabEl.value = "1";
+  felvetelEl.value = "";
+  kiszallitasEl.value = "";
+  editIndex = -1;
+}
+
+function render() {
+  console.log("Rendering table with", orders.length, "items");
+  tbody.innerHTML = "";
+  
+  orders.forEach((o, i) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${o.pizzanev}</td>
+      <td>${o.darab}</td>
+      <td><small>${o.felvetel}</small></td>
+      <td><small>${o.kiszallitas}</small></td>
+      <td>
+        <div class="actions">
+          <button data-edit="${i}" class="secondary">Szerkeszt</button>
+          <button data-del="${i}" class="secondary">Töröl</button>
+        </div>
+      </td>
+    `;
+    
+    const editBtn = tr.querySelector("[data-edit]");
+    const delBtn = tr.querySelector("[data-del]");
+    
+    if (editBtn) {
+      editBtn.addEventListener("click", () => {
+        console.log("Edit clicked for index", i);
+        onEdit(i);
+      });
+    }
+    
+    if (delBtn) {
+      delBtn.addEventListener("click", () => {
+        console.log("Delete clicked for index", i);
+        onDelete(i);
+      });
+    }
+    
+    tbody.appendChild(tr);
+  });
+}
+
+// Initial render
+console.log("Initial render");
