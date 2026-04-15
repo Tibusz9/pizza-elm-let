@@ -15,17 +15,19 @@
   </header>
   <main>
     <section class="card">
-      <h2>JavaScript CRUD (tömb alapú)</h2>
+      <h2>Rendelések kezelése</h2>
       <div class="grid">
         <div>
-          <label>Név</label><input id="nev" />
+          <label>Pizza neve</label><input id="pizzanev" placeholder="pl. Popey, Kagylós" />
         </div>
         <div>
-          <label>Kategória</label><select id="kategoria"></select>
+          <label>Darab</label><input id="darab" type="number" placeholder="1" min="1" />
         </div>
         <div>
-          <label>Vegetáriánus</label>
-          <select id="veg"><option value="0">Nem</option><option value="1">Igen</option></select>
+          <label>Felvétel (YYYY.MM.DD HH:MM:SS)</label><input id="felvetel" placeholder="2000.11.12 11:21:00" />
+        </div>
+        <div>
+          <label>Kiszállítás (YYYY.MM.DD HH:MM:SS)</label><input id="kiszallitas" placeholder="2000.11.12 12:11:00" />
         </div>
       </div>
       <div class="actions" style="margin-top:.75rem">
@@ -34,13 +36,13 @@
       </div>
       <p id="msg" class="muted"></p>
       <table>
-        <thead><tr><th>Név</th><th>Kategória</th><th>Vegetáriánus</th><th>Művelet</th></tr></thead>
+        <thead><tr><th>Pizza neve</th><th>Darab</th><th>Felvétel idő</th><th>Kiszállítás idő</th><th>Művelet</th></tr></thead>
         <tbody id="tbody"></tbody>
       </table>
     </section>
   </main>
   <footer>Készítők: <strong>Mészáros Tibor Ákos - Z21NS6</strong>, <strong>Becskeházi-Facskó Edit - CZU6N7</strong></footer>
-  <script src="data/pizzaData.js"></script>
+  <script src="data/ordersData.js"></script>
   <script src="assets/js/javascript-crud.js"></script>
 </body>
 </html>
