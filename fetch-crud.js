@@ -73,3 +73,34 @@ async function removeRow(id) {
     fMsg.className = "warning";
   }
 }
+
+function resetForm() {
+  editingId = null;
+  fNev.value = "";
+  fKat.value = "";
+  fVeg.value = "0";
+}
+
+function render(rows) {
+  fBody.innerHTML = "";
+  rows.forEach(row => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${row.id}</td>
+      <td>${row.nev}</td>
+      <td>${row.kategorianev}</td>
+      <td>${row.vegetarianus ? "Igen" : "Nem"}</td>
+      <td>
+        <div class="actions">
+          <button class="secondary" data-edit="${row.id}">Szerkeszt</button>
+          <button class="secondary" data-del="${row.id}">Töröl</button>
+        </div>
+      </td>
+    `;
+    tr.querySelector("[data-edit]").addEventListener("click", () => startEdit(row));
+    tr.querySelector("[data-del]").addEventListener("click", () => removeRow(row.id));
+    fBody.appendChild(tr);
+  });
+}
+
+loadRows();
