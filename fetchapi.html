@@ -13,3 +13,26 @@
       <a href="index.html">Főoldal</a><a href="javascript.html">JavaScript CRUD</a><a href="react.html">React CRUD</a><a href="spa.html">SPA</a><a href="fetchapi.html">Fetch API</a><a href="axios.html">Axios + React</a><a href="oojs.html">OOJS</a>
     </nav>
   </header>
+  <main>
+    <section class="card">
+      <h2>Fetch API + PHP + adatbázis CRUD</h2>
+      <div class="grid">
+        <div><label>Név</label><input id="f_nev"></div>
+        <div><label>Kategória</label><input id="f_kat"></div>
+        <div><label>Vegetáriánus</label><select id="f_veg"><option value="0">Nem</option><option value="1">Igen</option></select></div>
+      </div>
+      <div class="actions" style="margin-top:.75rem">
+        <button id="f_save">Mentés</button>
+        <button id="f_reset" class="secondary">Űrlap törlése</button>
+      </div>
+      <p id="f_msg" class="muted"></p>
+      <table>
+        <thead><tr><th>ID</th><th>Név</th><th>Kategória</th><th>Vegetáriánus</th><th>Művelet</th></tr></thead>
+        <tbody id="f_tbody"></tbody>
+      </table>
+    </section>
+  </main>
+  <footer>Készítők: <strong>Mészáros Tibor Ákos - Z21NS6</strong>, <strong>Becskeházi-Facskó Edit - CZU6N7</strong></footer>
+  <script src="assets/js/fetch-crud.js"></script>
+</body>
+</html>
