@@ -34,3 +34,16 @@ class Futar extends Sprite {
     this.render();
   }
 }
+const playground = document.getElementById("playground");
+const futarok = [];
+
+function spawnFutar() {
+  const f = new Futar(`Futár-${futarok.length + 1}`, 20 + Math.random() * 200, 20 + Math.random() * 150);
+  futarok.push(f);
+  playground.appendChild(f.el);
+
+  // Követelmény miatt: document.body.appendChild használat
+  const log = document.createElement("small");
+  log.className = "muted";
+  log.textContent = `${f.name} létrehozva.`;
+  document.body.appendChild(log);
