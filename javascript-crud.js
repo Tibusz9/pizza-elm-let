@@ -30,3 +30,39 @@ if (resetBtn) {
     resetForm();
   });
 }
+
+function onSave() {
+  console.log("onSave called");
+  const pizzanev = pizzanevEl.value.trim();
+  const darab = parseInt(darabEl.value, 10);
+  const felvetel = felvetelEl.value.trim();
+  const kiszallitas = kiszallitasEl.value.trim();
+
+  console.log({ pizzanev, darab, felvetel, kiszallitas, isNaN: isNaN(darab) });
+
+  if (!pizzanev || isNaN(darab) || darab <= 0 || !felvetel || !kiszallitas) {
+    msg.textContent = "Minden mező kitöltése kötelező és a darab pozitív szám!";
+    msg.className = "warning";
+    console.log("Validation error");
+    return;
+  }
+
+  const item = { pizzanev, darab, felvetel, kiszallitas };
+  console.log("Item to save:", item);
+
+  if (editIndex === -1) {
+    orders.unshift(item);
+    msg.textContent = "Új rendelés hozzáadva.";
+    console.log("Added new order, total:", orders.length);
+  } else {
+    orders[editIndex] = item;
+    msg.textContent = "Rendelés módosítva.";
+    editIndex = -1;
+    console.log("Updated order");
+  }
+  
+  msg.className = "success";
+  setTimeout(() => { msg.className = "muted"; }, 3000);
+  resetForm();
+  render();
+}
