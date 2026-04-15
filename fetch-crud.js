@@ -55,3 +55,21 @@ async function save() {
     fMsg.className = "warning";
   }
 }
+
+function startEdit(row) {
+  editingId = row.id;
+  fNev.value = row.nev;
+  fKat.value = row.kategorianev;
+  fVeg.value = String(row.vegetarianus);
+}
+
+async function removeRow(id) {
+  try {
+    await request(`${API_URL}?id=${id}`, { method: "DELETE" });
+    if (editingId === id) resetForm();
+    loadRows();
+  } catch (err) {
+    fMsg.textContent = err.message;
+    fMsg.className = "warning";
+  }
+}
