@@ -30,3 +30,28 @@ async function loadRows() {
     fMsg.className = "warning";
   }
 }
+
+async function save() {
+  const payload = {
+    nev: fNev.value.trim(),
+    kategorianev: fKat.value.trim(),
+    vegetarianus: Number(fVeg.value)
+  };
+  if (!payload.nev || !payload.kategorianev) return;
+
+  try {
+    if (editingId === null) {
+      await request(API_URL, { method: "POST", body: JSON.stringify(payload) });
+      fMsg.textContent = "Rekord létrehozva.";
+    } else {
+      await request(`${API_URL}?id=${editingId}`, { method: "PUT", body: JSON.stringify(payload) });
+      fMsg.textContent = "Rekord módosítva.";
+    }
+    fMsg.className = "success";
+    resetForm();
+    loadRows();
+  } catch (err) {
+    fMsg.textContent = err.message;
+    fMsg.className = "warning";
+  }
+}
