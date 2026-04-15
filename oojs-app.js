@@ -21,3 +21,8 @@ class Sprite {
     this.render();
   }
 }
+class Futar extends Sprite {
+  constructor(name, x, y) {
+    super(name, x, y, "🛵");
+    this.speed = 12;
+  }
