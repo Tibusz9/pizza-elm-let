@@ -26,3 +26,11 @@ class Futar extends Sprite {
     super(name, x, y, "🛵");
     this.speed = 12;
   }
+  randomStep(maxW, maxH) {
+    const dx = Math.round((Math.random() - 0.5) * this.speed * 2);
+    const dy = Math.round((Math.random() - 0.5) * this.speed * 2);
+    this.x = Math.max(0, Math.min(maxW - 36, this.x + dx));
+    this.y = Math.max(0, Math.min(maxH - 36, this.y + dy));
+    this.render();
+  }
+}
