@@ -93,4 +93,20 @@
         </tbody>
       </table>
     `;
-  
+  // Késleltetett eseménykezelő beállítás
+    setTimeout(() => {
+      document.getElementById("btnSave").addEventListener("click", save);
+      document.getElementById("btnReset").addEventListener("click", resetForm);
+
+      // Szerkeszt gombok
+      document.querySelectorAll("[data-edit]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = Number(btn.dataset.edit);
+          const cat = categories.find(c => c.id === id);
+          if (cat) {
+            document.getElementById("inputNev").value = cat.nev;
+            document.getElementById("inputAr").value = cat.ar;
+            editingId = id;
+          }
+        });
+      });
