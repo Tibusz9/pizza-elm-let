@@ -66,3 +66,18 @@ function onSave() {
   resetForm();
   render();
 }
+
+function onEdit(index) {
+  const o = orders[index];
+  pizzanevEl.value = o.pizzanev;
+  darabEl.value = o.darab;
+  felvetelEl.value = o.felvetel;
+  kiszallitasEl.value = o.kiszallitas;
+  editIndex = index;
+}
+
+function onDelete(index) {
+  orders.splice(index, 1);
+  if (editIndex === index) editIndex = -1;
+  render();
+}
