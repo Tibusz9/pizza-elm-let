@@ -110,3 +110,55 @@
           }
         });
       });
+      // Törlés gombok
+      document.querySelectorAll("[data-del]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = Number(btn.dataset.del);
+          deleteRow(id);
+        });
+      });
+    }, 0);
+  }
+
+  async function save() {
+    const nev = document.getElementById("inputNev").value.trim();
+    const ar = Number(document.getElementById("inputAr").value);
+
+    if (!nev || ar <= 0) {
+      showMessage("A kategória neve és ár (pozitív szám) kötelező!", "warning");
+      return;
+    }
+
+    try {
+      const payload = { nev, ar };
+      
+      if (usingAxios && hasAxios()) {
+        // API-val mentés
+        if (editingId === null) {
+          await window.axios.post(API_URL, payload);
+          showMessage("Kategória sikeresen hozzáadva!", "success");
+        } else {
+          await window.axios.put(`${API_URL}?id=${editingId}`, payload);
+          showMessage("Kategória sikeresen módosítva!", "success");
+        }
+        await loadData();
+      } else {
+        // Helyi mentés
+        if (editingId === null) {
+          const newId = categories.length > 0 ? Math.max(...categories.map(c => c.id)) + 1 : 1;
+          categories.unshift({ id: newId, ...payload });
+          showMessage("Kategória sikeresen hozzáadva!", "success");
+        } else {
+          const idx = categories.findIndex(c => c.id === editingId);
+          if (idx !== -1) {
+            categories[idx] = { id: editingId, ...payload };
+            showMessage("Kategória sikeresen módosítva!", "success");
+          }
+        }
+        resetForm();
+      }
+    } catch (err) {
+      showMessage("Hiba: " + err.message, "warning");
+      console.error("Save error:", err);
+    }
+  }
