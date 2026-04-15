@@ -53,3 +53,30 @@ nav a:hover { border-color: var(--accent); color: var(--accent); }
   padding: 1rem;
   margin-top: 1rem;
 }
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+input, select, button, textarea {
+  width: 100%;
+  padding: .55rem .7rem;
+  border-radius: 8px;
+  border: 1px solid #475569;
+  background: #0b1220;
+  color: var(--text);
+}
+button {
+  cursor: pointer;
+  background: linear-gradient(90deg, #0ea5e9, #22d3ee);
+  color: #00131a;
+  font-weight: 700;
+}
+button.secondary {
+  background: transparent;
+  color: var(--text);
+}
+.actions {
+  display: flex;
+  gap: .5rem;
