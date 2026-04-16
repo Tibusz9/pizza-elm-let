@@ -53,7 +53,6 @@ nav a:hover { border-color: var(--accent); color: var(--accent); }
   padding: 1rem;
   margin-top: 1rem;
 }
-
 .grid {
   display: grid;
   gap: 1rem;
@@ -80,7 +79,7 @@ button.secondary {
 .actions {
   display: flex;
   gap: .5rem;
-  }
+}
 table {
   width: 100%;
   border-collapse: collapse;
@@ -113,4 +112,3 @@ small, .muted { color: var(--muted); }
   user-select: none;
   font-size: 2rem;
 }
-
