@@ -40,3 +40,19 @@ try {
         echo json_encode(['updated' => $stmt->rowCount()], JSON_UNESCAPED_UNICODE);
         exit;
     }
+
+    if ($method === 'DELETE') {
+        $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+        $stmt = $pdo->prepare('DELETE FROM pizzas WHERE id = ?');
+        $stmt->execute([$id]);
+        echo json_encode(['deleted' => $stmt->rowCount()], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
+    http_response_code(405);
+    echo json_encode(['error' => 'Method not allowed']);
+} catch (Throwable $e) {
+    http_response_code(500);
+    echo json_encode(['error' => $e->getMessage()], JSON_UNESCAPED_UNICODE);
+}
+
