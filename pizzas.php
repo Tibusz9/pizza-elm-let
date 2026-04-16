@@ -15,3 +15,15 @@ try {
         echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC), JSON_UNESCAPED_UNICODE);
         exit;
     }
+     $input = json_decode(file_get_contents('php://input'), true) ?? [];
+
+    if ($method === 'POST') {
+        $stmt = $pdo->prepare('INSERT INTO pizzas (nev, kategorianev, vegetarianus) VALUES (?, ?, ?)');
+        $stmt->execute([
+            $input['nev'] ?? '',
+            $input['kategorianev'] ?? '',
+            (int)($input['vegetarianus'] ?? 0)
+        ]);
+        echo json_encode(['id' => (int)$pdo->lastInsertId()], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
