@@ -27,3 +27,16 @@ try {
         echo json_encode(['id' => (int)$pdo->lastInsertId()], JSON_UNESCAPED_UNICODE);
         exit;
     }
+
+    if ($method === 'PUT') {
+        $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+        $stmt = $pdo->prepare('UPDATE pizzas SET nev = ?, kategorianev = ?, vegetarianus = ? WHERE id = ?');
+        $stmt->execute([
+            $input['nev'] ?? '',
+            $input['kategorianev'] ?? '',
+            (int)($input['vegetarianus'] ?? 0),
+            $id
+        ]);
+        echo json_encode(['updated' => $stmt->rowCount()], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
