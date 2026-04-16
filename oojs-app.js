@@ -21,11 +21,13 @@ class Sprite {
     this.render();
   }
 }
+
 class Futar extends Sprite {
   constructor(name, x, y) {
     super(name, x, y, "🛵");
     this.speed = 12;
   }
+
   randomStep(maxW, maxH) {
     const dx = Math.round((Math.random() - 0.5) * this.speed * 2);
     const dy = Math.round((Math.random() - 0.5) * this.speed * 2);
@@ -34,6 +36,7 @@ class Futar extends Sprite {
     this.render();
   }
 }
+
 const playground = document.getElementById("playground");
 const futarok = [];
 
@@ -47,7 +50,7 @@ function spawnFutar() {
   log.className = "muted";
   log.textContent = `${f.name} létrehozva.`;
   document.body.appendChild(log);
-  }
+}
 
 function moveAll() {
   const maxW = playground.clientWidth;
@@ -57,4 +60,3 @@ function moveAll() {
 
 document.getElementById("spawn").addEventListener("click", spawnFutar);
 document.getElementById("move").addEventListener("click", moveAll);
-
