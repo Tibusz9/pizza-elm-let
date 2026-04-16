@@ -102,8 +102,9 @@ function PizzaApp() {
           )
         )
       ),
-                         // Gombok
-      React.createElement("div", { className: "actions", style: "margin-top: .75rem" },
+      
+      // Gombok
+      React.createElement("div", { className: "actions", style: { marginTop: ".75rem" } },
         React.createElement("button", { onClick: handleSave }, 
           editingId === null ? "Hozzáadás" : "Módosítás"
         ),
@@ -111,7 +112,7 @@ function PizzaApp() {
       ),
 
       // Kereső
-      React.createElement("div", { style: "margin-top: .75rem" },
+      React.createElement("div", { style: { marginTop: ".75rem" } },
         React.createElement("input", { 
           placeholder: "Keresés név szerint...", 
           value: search, 
@@ -154,5 +155,3 @@ function PizzaApp() {
 // Renderelés a DOM-ba
 const root = ReactDOM.createRoot(document.getElementById("reactRoot"));
 root.render(React.createElement(PizzaApp));
-
-                        
