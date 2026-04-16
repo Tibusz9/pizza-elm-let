@@ -48,3 +48,57 @@ function PizzaApp() {
     }
     handleReset();
   };
+
+  // Szerkesztés indítása
+  const handleEdit = (pizza) => {
+    setForm({ nev: pizza.nev, kategorianev: pizza.kategorianev, vegetarianus: pizza.vegetarianus });
+    setEditingId(pizza.id);
+  };
+
+  // Törlés
+  const handleDelete = (id) => {
+    setPizzas(prev => prev.filter(p => p.id !== id));
+    if (editingId === id) handleReset();
+  };
+
+  // Űrlap resetelése
+  const handleReset = () => {
+    setForm({ nev: "", kategorianev: "apród", vegetarianus: 0 });
+    setEditingId(null);
+  };
+
+  return (
+    React.createElement("div", null,
+      // Űrlap
+      React.createElement("div", { className: "grid" },
+        React.createElement("div", null,
+          React.createElement("label", null, "Név"),
+          React.createElement("input", { 
+            name: "nev", 
+            value: form.nev, 
+            onChange: handleChange, 
+            placeholder: "Pizza neve" 
+          })
+        ),
+        React.createElement("div", null,
+          React.createElement("label", null, "Catégorie"),
+          React.createElement("select", { 
+            name: "kategorianev", 
+            value: form.kategorianev, 
+            onChange: handleChange 
+          },
+            KATEGORIAK.map(k => React.createElement("option", { key: k, value: k }, k))
+          )
+        ),
+        React.createElement("div", null,
+          React.createElement("label", null, "Vegetáriánus"),
+          React.createElement("select", { 
+            name: "vegetarianus", 
+            value: form.vegetarianus, 
+            onChange: handleChange 
+          },
+            React.createElement("option", { value: 0 }, "Nem"),
+            React.createElement("option", { value: 1 }, "Igen")
+          )
+        )
+      ),
