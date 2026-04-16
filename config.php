@@ -6,3 +6,16 @@ function readEnvValue(string $key, string $default = ''): string {
     if (!file_exists($envPath)) {
         return $default;
     }
+
+    $lines = file($envPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        $line = trim($line);
+        if ($line === '' || str_starts_with($line, '#')) continue;
+        [$k, $v] = array_pad(explode('=', $line, 2), 2, '');
+        if (trim($k) === $key) {
+            return trim($v);
+        }
+    }
+
+    return $default;
+}
