@@ -102,3 +102,57 @@ function PizzaApp() {
           )
         )
       ),
+                         // Gombok
+      React.createElement("div", { className: "actions", style: "margin-top: .75rem" },
+        React.createElement("button", { onClick: handleSave }, 
+          editingId === null ? "Hozzáadás" : "Módosítás"
+        ),
+        React.createElement("button", { className: "secondary", onClick: handleReset }, "Űrlap törlése")
+      ),
+
+      // Kereső
+      React.createElement("div", { style: "margin-top: .75rem" },
+        React.createElement("input", { 
+          placeholder: "Keresés név szerint...", 
+          value: search, 
+          onChange: (e) => setSearch(e.target.value) 
+        })
+      ),
+
+      // Táblázat
+      React.createElement("table", null,
+        React.createElement("thead", null,
+          React.createElement("tr", null,
+            React.createElement("th", null, "ID"),
+            React.createElement("th", null, "Név"),
+            React.createElement("th", null, "Catégorie"),
+            React.createElement("th", null, "Veg."),
+            React.createElement("th", null, "Művelet")
+          )
+        ),
+        React.createElement("tbody", null,
+          filteredPizzas.map(p => 
+            React.createElement("tr", { key: p.id },
+              React.createElement("td", null, p.id),
+              React.createElement("td", null, p.nev),
+              React.createElement("td", null, React.createElement("span", { className: "badge" }, p.kategorianev)),
+              React.createElement("td", null, p.vegetarianus ? "Igen" : "Nem"),
+              React.createElement("td", null,
+                React.createElement("div", { className: "actions" },
+                  React.createElement("button", { className: "secondary", onClick: () => handleEdit(p) }, "Szerkeszt"),
+                  React.createElement("button", { className: "secondary", onClick: () => handleDelete(p.id) }, "Töröl")
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+  );
+}
+
+// Renderelés a DOM-ba
+const root = ReactDOM.createRoot(document.getElementById("reactRoot"));
+root.render(React.createElement(PizzaApp));
+
+                        
