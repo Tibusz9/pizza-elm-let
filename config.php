@@ -19,3 +19,17 @@ function readEnvValue(string $key, string $default = ''): string {
 
     return $default;
 }
+
+function getPdo(): PDO {
+    $host = readEnvValue('DB_HOST', 'localhost');
+    $db = readEnvValue('DB_NAME', 'adatb');
+    $user = readEnvValue('DB_USER', 'adatbf');
+    $pass = readEnvValue('DB_PASS', '****');
+
+    return new PDO(
+        "mysql:host=$host;dbname=$db;charset=utf8mb4",
+        $user,
+        $pass,
+        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+    );
+}
