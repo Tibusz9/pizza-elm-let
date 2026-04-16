@@ -22,3 +22,29 @@ function PizzaApp() {
       setPizzas(data);
     }
   }, []);
+
+  // Szűrt pizza lista
+  const filteredPizzas = pizzas.filter(p => 
+    p.nev.toLowerCase().includes(search.toLowerCase())
+  );
+
+  // Űrlap változás kezelése
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm(prev => ({ ...prev, [name]: name === "vegetarianus" ? Number(value) : value }));
+  };
+
+  // Mentés (Create/Update)
+  const handleSave = () => {
+    if (!form.nev || !form.kategorianev) return;
+
+    if (editingId === null) {
+      // Új pizza hozzáadása
+      const newId = pizzas.length > 0 ? Math.max(...pizzas.map(p => p.id)) + 1 : 1;
+      setPizzas(prev => [{ id: newId, ...form }, ...prev]);
+    } else {
+      // Meglévő módosítása
+      setPizzas(prev => prev.map(p => p.id === editingId ? { id: editingId, ...form } : p));
+    }
+    handleReset();
+  };
