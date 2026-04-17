@@ -13,13 +13,16 @@ function tableExists(PDO $pdo, string $tableName): bool {
 }
 
 function resolveOrderTable(PDO $pdo): string {
+    if (tableExists($pdo, 'rendeles_txt')) {
+        return 'rendeles_txt';
+    }
     if (tableExists($pdo, 'rendeles')) {
         return 'rendeles';
     }
     if (tableExists($pdo, 'orders')) {
         return 'orders';
     }
-    throw new RuntimeException('Nem talalhato rendeles tabla (rendeles vagy orders).');
+    throw new RuntimeException('Nem talalhato rendeles tabla (rendeles_txt, rendeles vagy orders).');
 }
 
 try {
@@ -50,5 +53,5 @@ try {
     echo json_encode(['error' => 'Method not allowed']);
 } catch (Throwable $e) {
     http_response_code(500);
-    echo json_encode(['error' => 'Adatbazis kapcsolat vagy szerver hiba.'], JSON_UNESCAPED_UNICODE);
+    echo json_encode(['error' => $e->getMessage()], JSON_UNESCAPED_UNICODE);
 }
