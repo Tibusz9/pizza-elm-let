@@ -23,13 +23,16 @@ function readEnvValue(string $key, string $default = ''): string {
 function getPdo(): PDO {
     $host = readEnvValue('DB_HOST', 'localhost');
     $db = readEnvValue('DB_NAME', 'adatb');
-    $user = readEnvValue('DB_USER', 'adatbf');
-    $pass = readEnvValue('DB_PASS', '****');
+    $user = readEnvValue('DB_USER', '');
+    $pass = readEnvValue('DB_PASS', '');
+
+    $username = $user !== '' ? $user : null;
+    $password = $pass !== '' ? $pass : null;
 
     return new PDO(
         "mysql:host=$host;dbname=$db;charset=utf8mb4",
-        $user,
-        $pass,
+        $username,
+        $password,
         [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
     );
 }
