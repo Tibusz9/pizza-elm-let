@@ -26,13 +26,14 @@ function getPdo(): PDO {
     $user = readEnvValue('DB_USER', '');
     $pass = readEnvValue('DB_PASS', '');
 
-    $username = $user !== '' ? $user : null;
-    $password = $pass !== '' ? $pass : null;
+    if ($user === '' || $pass === '') {
+        throw new RuntimeException('A DB_USER es DB_PASS kotelezo a .env fajlban.');
+    }
 
     return new PDO(
         "mysql:host=$host;dbname=$db;charset=utf8mb4",
-        $username,
-        $password,
+        $user,
+        $pass,
         [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
     );
 }
